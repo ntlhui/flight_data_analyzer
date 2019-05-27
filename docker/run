@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker run -it --privileged -v $(readlink -f $1):/root/code ece143
+docker run -it --privileged -v $(readlink -f $1):/root/code -p 8888:8888 ece143
