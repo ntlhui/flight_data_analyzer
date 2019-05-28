@@ -131,6 +131,7 @@ if __name__ == '__main__':
 	p.starmap(process_dji, process_dji_input)
 
 	fig, distances = plot_data(output_file)
+	np.save('distances.npy', distances)
 	os.remove(output_file)
 	plt.figure(fig.number)
 	plt.savefig(args.output_file)
