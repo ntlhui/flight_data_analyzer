@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.4.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_323bf7a3beb649e986a7d09b306d6a6f {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_323bf7a3beb649e986a7d09b306d6a6f" ></div>
+        
+</body>
+<script>    
+    
+            var map_323bf7a3beb649e986a7d09b306d6a6f = L.map(
+                "map_323bf7a3beb649e986a7d09b306d6a6f",
+                {
+                    center: [32.61058644444444, -113.9595255],
+                    crs: L.CRS.EPSG3857,
+                    zoomControl: true,
+                    preferCanvas: false,
+                    zoom: 4,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_db0160daa50b471b8eaaeafa8e8aaa09 = L.tileLayer(
+                "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            var marker_f23ddd304cf541d78965924d82bb402d = L.marker(
+                [37.872001, -122.319992],
+                {}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            marker_f23ddd304cf541d78965924d82bb402d.bindTooltip(
+                `<div>
+                     Berkeley
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var polygon_b3b2bdcaf35542b2af3e2ad1618ff96a = L.polygon(
+                [[37.87132, -122.320851], [37.87132, -122.319133], [37.872682, -122.319133], [37.872682, -122.320851]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            var marker_d3bad7007b884733b00582d1bf5e514f = L.marker(
+                [37.8997885, -122.286862],
+                {}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            marker_d3bad7007b884733b00582d1bf5e514f.bindTooltip(
+                `<div>
+                     Napa Valley
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var polygon_5badbc3ca671465baae60b4d60b42e57 = L.polygon(
+                [[37.899743, -122.286919], [37.899743, -122.286805], [37.899834, -122.286805], [37.899834, -122.286919]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            var marker_55d7d26f839a4002b93318902ed5bdf5 = L.marker(
+                [33.971118499999996, -117.344206],
+                {}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            marker_55d7d26f839a4002b93318902ed5bdf5.bindTooltip(
+                `<div>
+                     Riverside
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var polygon_1890087a1dd9432484f23b0f9c5ca7b8 = L.polygon(
+                [[33.970074, -117.34535], [33.970074, -117.343062], [33.972163, -117.343062], [33.972163, -117.34535]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            var marker_2ec607e2ee91428a9524aa4181058aac = L.marker(
+                [32.885363, -117.23518050000001],
+                {}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            marker_2ec607e2ee91428a9524aa4181058aac.bindTooltip(
+                `<div>
+                     Warren Canyon
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var polygon_5ce3340e51c04f298f4994ae645d3967 = L.polygon(
+                [[32.882564, -117.23811], [32.882564, -117.232251], [32.888162, -117.232251], [32.888162, -117.23811]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            var marker_afee17038f4a41d2a35c0c7fb5db9c6e = L.marker(
+                [32.859233, -117.231629],
+                {}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            marker_afee17038f4a41d2a35c0c7fb5db9c6e.bindTooltip(
+                `<div>
+                     La Jolla
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var polygon_fb592792d35649f4b5ec25d31721b186 = L.polygon(
+                [[32.859171, -117.231697], [32.859171, -117.231561], [32.859295, -117.231561], [32.859295, -117.231697]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            var marker_2d4197764fbd40379f7c4107bc872477 = L.marker(
+                [32.9904245, -117.1294915],
+                {}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            marker_2d4197764fbd40379f7c4107bc872477.bindTooltip(
+                `<div>
+                     Black Mountain
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var polygon_f67e9b5807124b6a9529c8c1acd0c38d = L.polygon(
+                [[32.98801, -117.130834], [32.98801, -117.128149], [32.992839, -117.128149], [32.992839, -117.130834]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            var marker_b8f0a77b440e484aa533b9c4268413b9 = L.marker(
+                [32.6306515, -116.093162],
+                {}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            marker_b8f0a77b440e484aa533b9c4268413b9.bindTooltip(
+                `<div>
+                     Valley of the Moon
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var polygon_2d089e1396f246209ec6612935b995b9 = L.polygon(
+                [[32.630417, -116.093377], [32.630417, -116.092947], [32.630886, -116.092947], [32.630886, -116.093377]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            var marker_c8332141e38a45c1b1fbb2e4844d296b = L.marker(
+                [32.7126295, -115.93375599999999],
+                {}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            marker_c8332141e38a45c1b1fbb2e4844d296b.bindTooltip(
+                `<div>
+                     Yuha Desert
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var polygon_abe6778401324ac58f05a5c3bad0c2cb = L.polygon(
+                [[32.708815, -115.935509], [32.708815, -115.932003], [32.716444, -115.932003], [32.716444, -115.935509]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            var marker_8f1d1a14f7fe40bc8e31213f8662649c = L.marker(
+                [19.674068499999997, -80.0614505],
+                {}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+    
+            marker_8f1d1a14f7fe40bc8e31213f8662649c.bindTooltip(
+                `<div>
+                     Cayman Islands
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var polygon_35487d7ee35649d2924acadcd222cb36 = L.polygon(
+                [[19.657707, -80.110426], [19.657707, -80.012475], [19.69043, -80.012475], [19.69043, -80.110426]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_323bf7a3beb649e986a7d09b306d6a6f);
+        
+</script>
