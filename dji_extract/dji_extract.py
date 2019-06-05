@@ -94,9 +94,9 @@ class DJILog(object):
 
 	def extract_times(self):
 		fields = ['offsetTime',
-				  'GPS(0):dateTime']
+				  'GPS:dateTimeStamp']
 		datetime = self.extract_fields(fields)
-		return datet
+		return datetime
 
 		
 if __name__ == '__main__':
