@@ -1,4 +1,4 @@
-from arducopter_extract import ArduLog
+from arducopter_extract.arducopter_extract import ArduLog
 import pandas as pd
 import glob
 import numpy as np
@@ -7,7 +7,7 @@ import os
 
 def get_files():
     #files = glob.glob("/root/gdrive" + '/**/*.bin', recursive=True) + glob.glob("/root/gdrive" + '/**/*.BIN', recursive=True)
-    files = glob.glob("/root/gdrive" + '/**/*.BIN', recursive=True)
+    files = glob.glob("/home/ntlhui/googledrive" + '/**/*.BIN', recursive=True)
 
     return files
 
@@ -110,7 +110,7 @@ def altitude_brackets(altitudes,currents):
 if __name__ == '__main__':
     files = get_files()
   #  df_altitudes = get_altitudes(files[:3])
-  #  df_takeoff = get_dates(files)
-  #  df_takeoff.to_pickle("./dates.pkl")
+    df_takeoff = get_dates(files)
+    df_takeoff.to_pickle("./dates.pkl")
   #  df_currents = get_currents(files[:3])
   #  df_brackets = altitude_brackets(df_altitudes,df_currents)
