@@ -12,6 +12,7 @@ import utm
 import cv2
 import argparse
 import ipython_bell
+import shapefile
 
 def invert_tf(tf):
 	'''Inverts a SE3 transform'''
@@ -183,6 +184,8 @@ if __name__ == '__main__':
 			raw_extents = line.strip().split(':')[1].split(';')
 			extents = [(float(coord.split(',')[0]), float(coord.split(',')[1])) for coord in raw_extents]
 			all_extents += [extents]
+
+	np.save('flight_extents.npy', all_extents)
 
 	flight_areas = []
 
