@@ -154,6 +154,7 @@ class ArduLog(object):
 		return np.array(currents)
 
 	def extract_modes(self):
+		self.mav_master = mavutil.mavlink_connection(self.path)
 		MODE_fields = ['TimeMS',
 					   'Mode']
 		modes = []
