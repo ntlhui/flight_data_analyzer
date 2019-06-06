@@ -3,7 +3,7 @@ import pandas as pd
 import glob
 import numpy as np
 import os
-
+import pickle
 
 def get_files():
     #files = glob.glob("/root/gdrive" + '/**/*.bin', recursive=True) + glob.glob("/root/gdrive" + '/**/*.BIN', recursive=True)
@@ -109,8 +109,11 @@ def altitude_brackets(altitudes,currents):
 
 if __name__ == '__main__':
     files = get_files()
-  #  df_altitudes = get_altitudes(files[:3])
-    df_takeoff = get_dates(files)
-    df_takeoff.to_pickle("./dates.pkl")
+    df_altitudes = get_altitudes(files)
+    df_altitudes.to_csv('./data/altitudes.csv')
+    with open('./data/altitudes.pkl') as f:
+        pickle.dump(df_altitudes, f)
+    # df_takeoff = get_dates(files)
+    # df_takeoff.to_pickle("./data/dates.pkl")
   #  df_currents = get_currents(files[:3])
   #  df_brackets = altitude_brackets(df_altitudes,df_currents)
