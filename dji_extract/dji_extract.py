@@ -18,6 +18,7 @@ class DJILog(object):
 	def __init__(self, path):
 		super(DJILog, self).__init__()
 		assert(os.path.isfile(path))
+		assert(os.path.getsize(path) > 0)
 		assert(mimetypes.guess_type(path)[0] == 'text/csv')
 		self.path = path
 
@@ -31,6 +32,12 @@ class DJILog(object):
 		return True
 
 	def extract_fields(self, fields):
+		'''Extracts the specified fields from this logfile.
+
+		:return	data	a List of lists, with each row corresponding to a row
+						from the logfile, and each column corresponding to the
+						given field
+		'''
 		with open(self.path) as csv_file:
 			headers_arr = csv_file.readline().split(',')
 			headers = {headers_arr[i]: i for i in range(len(headers_arr))}
@@ -46,6 +53,9 @@ class DJILog(object):
 
 
 	def extract_6dof(self):
+		'''Extracts the timestamp, latitude, longitude, altitude, roll, pitch, 
+		and yaw from this logfile
+		'''
 		fields = ['offsetTime',
 				  'IMU_ATTI(0):Longitude',
 				  'IMU_ATTI(0):Latitude',
@@ -60,6 +70,7 @@ class DJILog(object):
 		return np.array(poses)
 
 	def extract_vel(self):
+		'''Extracts the north, east, and down velocities from this logfile.'''
 		fields = ['offsetTime',
 				  'IMU_ATTI(0):velN',
 				  'IMU_ATTI(0):velE',
@@ -70,6 +81,7 @@ class DJILog(object):
 		return np.array(velocities)
 
 	def extract_rc(self):
+		'''Extracts the RC channels from this logfile'''
 		fields = ['offsetTime',
 				  'RC:Throttle',
 				  'RC:Rudder',
@@ -80,12 +92,14 @@ class DJILog(object):
 		return np.array(rc)
 
 	def extract_modes(self):
+		'''Extracts the flight modes from this logfile'''
 		fields = ['offsetTime',
 				  'RC:ModeSwitch']
 		modes = self.extract_fields(fields)
 		return np.array(modes)
 
 	def extract_current(self):
+		'''Extracts the battery current from this logfile'''
 		fields = ['offsetTime',
 				  'BattInfo:Current']
 		current_str = self.extract_fields(fields)
@@ -107,6 +121,7 @@ class DJILog(object):
 		return v, c
 
 	def extract_times(self):
+		'''Extracts the date timestamps from GPS for this log'''
 		fields = ['offsetTime',
 				  'GPS:dateTimeStamp']
 		datetime = self.extract_fields(fields)
