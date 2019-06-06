@@ -16,6 +16,7 @@ class ACFT(Enum):
     UNKNOWN = -1
     SOLO    = 0
     PX4     = 1
+    S1000	= 2
 
 class ArduLog(object):
 	"""
@@ -26,7 +27,7 @@ class ArduLog(object):
 		assert(os.path.isfile(path))
 		#assert(mimetypes.guess_type(path)[0] == 'log')
 		self.path = path
-		self.acft = ACFT.SOLO
+		self.acft = ACFT.UNKNOWN
 
 
 	def leap(self,date):
@@ -49,6 +50,28 @@ class ArduLog(object):
 			if leap_dates[j] < date < leap_dates[j + 1]:
 				return j + 1
 		return len(leap_dates)
+
+	def getType(self):
+		if self.acft == ACFT.UNKNOWN:
+			self.mav_master = mavutil.mavlink_connection(self.path)
+			while True:
+				msg = self.mav_master.recv_match(blocking = False)
+				if msg is None:
+					break
+				if msg.get_type() == 'MSG':
+					version = msg.to_dict()['Message'].split()[1]
+					if version == 'solo-1.3.1':
+						self.acft = ACFT.SOLO
+						break
+					elif version == 'V3.3.3':
+						self.acft = ACFT.PX4
+						break
+					elif version == 'V3.5.4':
+						self.acft = ACFT.S1000
+						break
+
+		return self.acft
+
 
 	def extract_6dof1(self):
 		self.mav_master = mavutil.mavlink_connection(self.path)
@@ -160,7 +183,7 @@ class ArduLog(object):
 					c	Dictionary of timestamped current draw
 		'''
 		self.mav_master = mavutil.mavlink_connection(self.path)
-		fields = ['TimeMS', 'VN', 'VE', 'VD', 'Curr']
+		fields = ['TimeMS', 'VN', 'VE', 'VD', 'Curr', 'Volt']
 
 		v = {}
 		c = {}
@@ -180,7 +203,7 @@ class ArduLog(object):
 			if msg.get_type() == 'EKF1':
 				v[int(msg.to_dict()[fields[0]] * scale)] = [msg.to_dict()[x] for x in fields[1:4]]
 			if msg.get_type() == 'CURR':
-				c[int(msg.to_dict()[fields[0]] * scale)] = msg.to_dict()[fields[4]]
+				c[int(msg.to_dict()[fields[0]] * scale)] = float(msg.to_dict()[fields[4]]) / 1000 * float(msg.to_dict()[fields[5]]) / 100
 		return v, c
 
 
@@ -217,12 +240,15 @@ class ArduLog(object):
 			msg = self.mav_master.recv_match(blocking = False)
 			if msg is None:
 				break
-			if msg.get_type() == 'MSG':
+			if msg.get_type() == 'MSG' and self.acft == ACFT.UNKNOWN:
 				version = msg.to_dict()['Message'].split()[1]
 				if version == 'solo-1.3.1':
 					self.acft = ACFT.SOLO
 				elif version == 'V3.3.3':
 					self.acft = ACFT.PX4
+				else:
+					print("%s: %s" % (self.path, version))
+					return
 
 			if msg.get_type() == 'GPS':
 				if msg.to_dict()['Status'] >= 3:
@@ -231,6 +257,10 @@ class ArduLog(object):
 						gps_week = int(msg.to_dict()['Week'])
 						apm_time = int(msg.to_dict()['T'])
 					elif self.acft == ACFT.PX4:
+						gps_time = int(msg.to_dict()['GMS'])
+						gps_week = int(msg.to_dict()['GWk'])
+						apm_time = int(msg.to_dict()['TimeUS']) / 1e3
+					elif self.acft == ACFT.S1000:
 						gps_time = int(msg.to_dict()['GMS'])
 						gps_week = int(msg.to_dict()['GWk'])
 						apm_time = int(msg.to_dict()['TimeUS']) / 1e3
