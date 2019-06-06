@@ -97,10 +97,11 @@ if __name__ == '__main__':
 	max_range_dji = p.map(process_dji, djilogs)
 
 	distances = max_range_ac + max_range_dji
-	np.save('ranges.npy', np.array(distances))
+	distances = np.array([rng for rng in distances if rng is not None])
+	np.save('data/ranges.npy', (distances))
 
 
-	q_distances = np.round(distances / 100) * 100
+	q_distances = np.round((distances) / 100) * 100
 	fig = plt.figure()
 	plt.hist(q_distances)
 	plt.xlabel('Distance (m)')
