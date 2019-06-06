@@ -3,6 +3,7 @@
 import numpy as np
 import os
 import mimetypes
+import pandas as pd
 
 def lc(path):
 	'''Returns the number of lines in the specified file'''
@@ -113,11 +114,11 @@ class DJILog(object):
 					c	Timestamped currents for this log
 		'''
 		fields = ['offsetTime', 'IMU_ATTI(0):velN', 'IMU_ATTI(0):velE', 
-					'IMU_ATTI(0):velD', 'BattInfo:Current']
+					'IMU_ATTI(0):velD', 'BattInfo:Current', 'BattInfo:Pack_ve']
 		v_list = self.extract_fields(fields[0:4])
 		v = {int(float(v[0])):[float(x) for x in v[1:4]] for v in v_list if v[1] != '' and v[2] != '' and v[3] != ''}
-		i_list = self.extract_fields([fields[0], fields[4]])
-		c = {int(float(c[0])):float(c[1]) for c in i_list if c[1] != ''}
+		i_list = self.extract_fields([fields[0], fields[4], fields[5]])
+		c = {int(float(c[0])):float(c[1]) * float(c[2]) for c in i_list if c[1] != '' and c[2] != ''}
 		return v, c
 
 	def extract_times(self):
@@ -127,7 +128,23 @@ class DJILog(object):
 		datetime = self.extract_fields(fields)
 		return datetime
 
-		
+	def get_takeoffs(self):
+		'''Extracts the number of takeoffs from this logfile'''
+		fields = ['offsetTime', 'BattInfo:Current']
+		current_str = self.extract_fields(fields)
+		current = {int(float(x[0])):float(x[1]) for x in current_str if self._not_empty(x)}
+		prev_current = 0
+		landings = 0
+		takeoffs = 0
+		for key in sorted(current.keys()):
+			if current[key] < 2 and prev_current > 2:
+				# landing
+				landings += 1
+			elif current[key] > 2 and prev_current < 2:
+				# takeoff
+				takeoffs += 1
+				prev_current = current[key]
+		return takeoffs
 if __name__ == '__main__':
 	path = 'FLY034.csv'
 	log = DJILog(path)
