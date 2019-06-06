@@ -153,6 +153,37 @@ class ArduLog(object):
 				currents.append(current)    
 		return np.array(currents)
 
+	def extract_vel_current(self):
+		'''Returns the velocities and currents from this logfile
+
+		:returns	v	Dictionary of timestamped velocities Vn, Ve, Vd
+					c	Dictionary of timestamped current draw
+		'''
+		self.mav_master = mavutil.mavlink_connection(self.path)
+		fields = ['TimeMS', 'VN', 'VE', 'VD', 'Curr']
+
+		v = {}
+		c = {}
+		scale = 1e-3
+		while True:
+			msg = self.mav_master.recv_match(blocking = False)
+			if msg is None:
+				break
+			if msg.get_type() == 'MSG':
+				version = msg.to_dict()['Message'].split()[1]
+				if version == 'solo-1.3.1':
+					self.acft = ACFT.SOLO
+				elif version == 'V3.3.3':
+					self.acft = ACFT.PX4
+					fields[0] = 'TimeUS'
+					scale = 1e-6
+			if msg.get_type() == 'EKF1':
+				v[int(msg.to_dict()[fields[0]] * scale)] = [msg.to_dict()[x] for x in fields[1:4]]
+			if msg.get_type() == 'CURR':
+				c[int(msg.to_dict()[fields[0]] * scale)] = msg.to_dict()[fields[4]]
+		return v, c
+
+
 	def extract_modes(self):
 		self.mav_master = mavutil.mavlink_connection(self.path)
 		MODE_fields = ['TimeMS',
