@@ -92,6 +92,20 @@ class DJILog(object):
 		current = [[float(x) for x in i] for i in current_str if self._not_empty(i)]
 		return np.array(current)
 
+	def extract_vel_current(self):
+		'''Extracts the velocities and current for this log
+
+		:returns	v	Timestamped velocities for this log in m/s as Vn, Ve, Vd
+					c	Timestamped currents for this log
+		'''
+		fields = ['offsetTime', 'IMU_ATTI(0):velN', 'IMU_ATTI(0):velE', 
+					'IMU_ATTI(0):velD', 'BattInfo:Current']
+		v_list = self.extract_fields(fields[0:4])
+		v = {int(float(v[0])):[float(x) for x in v[1:4]] for v in v_list if v[1] != '' and v[2] != '' and v[3] != ''}
+		i_list = self.extract_fields([fields[0], fields[4]])
+		c = {int(float(c[0])):float(c[1]) for c in i_list if c[1] != ''}
+		return v, c
+
 	def extract_times(self):
 		fields = ['offsetTime',
 				  'GPS:dateTimeStamp']
