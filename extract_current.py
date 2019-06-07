@@ -11,6 +11,12 @@ import pandas as pd
 import pickle
 
 def extract_vel_current(logfile):
+	'''Extracts the cruise speed information from the supplied drone logfile.
+
+	:param	logfile	Path to drone logfile
+	:returns	data	Dictionary of paired horizontal velocity and power keyed
+						by timestamp
+	'''
 	if os.path.getsize(logfile) == 0:
 		return None
 	if os.path.splitext(logfile)[1].lower() == '.bin':
@@ -24,7 +30,17 @@ def extract_vel_current(logfile):
 	return {key:[v[key], c[key]] for key in set(v.keys()).intersection(c.keys())}
 
 def extract_vel_current_APM(logfile):
+	'''Extracts the cruise speed information from the supplied APM logfile.
+	
+	:param	logfile	Path to APM logfile
+	:returns	v	Dictionary of timestamped velocities Vn, Ve, Vd
+				c	Dictionary of timestamped current draw
+
+	'''
+	assert(os.path.splitext(logfile)[1].lower() == .bin)
+	assert(os.path.getsize(logfile) > 0)
 	logstruct = ArduLog(logfile)
+	# if logstruct.getType() != ACFT.S1000 and logstruct.getType() != ACFT.PX4:
 	if logstruct.getType() != ACFT.SOLO:
 		return None
 	try:
@@ -35,6 +51,13 @@ def extract_vel_current_APM(logfile):
 	return v, c
 
 def extract_vel_current_DJI(logfile):
+	'''Extracts the cruise speed informaiton from the supplied DJI logfile.
+
+	:param	logfile	Path to DJI logfile
+	:returns	v	Dictionary of timestamped velocities Vn, Ve, Vd
+				c	Dictionary of timestamped current draw
+
+	'''
 	logstruct = DJILog(logfile)
 	v, c = logstruct.extract_vel_current()
 	return v, c
@@ -48,5 +71,7 @@ if __name__ == '__main__':
 
 	p = Pool(7)
 	results = p.map(extract_vel_current, all_logs)
+	# with open('data/dji_vel_cur.pkl', 'wb') as f:
+	# with open('data/px4_vel_cur.pkl', 'wb') as f:
 	with open('data/solo_vel_cur.pkl', 'wb') as f:
 		pickle.dump(results, f)
