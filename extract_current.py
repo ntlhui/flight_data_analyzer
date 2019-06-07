@@ -20,7 +20,7 @@ def extract_vel_current(logfile):
 		v3, c = retval
 	if os.path.splitext(logfile)[1].lower() == '.csv':
 		v3, c = extract_vel_current_DJI(logfile)
-	v = {key:np.linalg.norm(np.array(vel)) for key, vel in v3.items()}
+	v = {key:np.linalg.norm(np.array(vel[0:2])) for key, vel in v3.items()}
 	return {key:[v[key], c[key]] for key in set(v.keys()).intersection(c.keys())}
 
 def extract_vel_current_APM(logfile):
@@ -43,9 +43,10 @@ if __name__ == '__main__':
 	data_dir = '/home/ntlhui/googledrive'
 	arducopterlogs = glob.glob(os.path.join(data_dir, "**", "*.BIN"), recursive=True) + glob.glob(os.path.join(data_dir, "**", "*.bin"), recursive=True)
 	djilogs = glob.glob(os.path.join(data_dir, "**", "*.csv"), recursive=True)
+	# all_logs = djilogs
 	all_logs = arducopterlogs
 
 	p = Pool(7)
 	results = p.map(extract_vel_current, all_logs)
-	with open('data/vel_cur.pkl', 'wb') as f:
+	with open('data/solo_vel_cur.pkl', 'wb') as f:
 		pickle.dump(results, f)
