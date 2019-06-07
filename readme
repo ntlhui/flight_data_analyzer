@@ -1,0 +1,19 @@
+The data is included in the data floder, and you should use docker to get access.
+Packages that need to be installed:
+  python3, matplotlib, numpy, pandas, folium, calmap, pickle, utm, datetime, hvplot, holoviews, glob, os, seaborn, multiprocessing, 
+  itertools, argparse, math, cv2, ipython_bell, shapefile, and dji_extract, arducopter_extract we wrote must be included.
+File Structure:
+  The visualization for this project is made by Flight Logs Analyzer Visualization.ipynb, to run this file, please make sure that following 
+files are included:
+    data/ranges.npy
+    data/distances.npy
+    data/flight_extents.npy
+    data/altitudes.pkl
+    data/dates.pkl
+    data/dict_extents.npy
+    data/dji_vel_cur.pkl
+    data/solo_vel_cur.pkl
+    data/types.pkl
+  
+
+            
