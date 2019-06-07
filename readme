@@ -1,2 +1,5 @@
 The data is included in data floder, and you should use docker to get access.
-Packages that need to be installed:python3, matplotlib, numpy, pandas, folium, calmap, pickle, utm, datetime, hvplot, holoviews, glob, os, 
+Packages that need to be installed:
+python3, matplotlib, numpy, pandas, folium, calmap, pickle, utm, datetime, hvplot, holoviews, glob, os, seaborn, multiprocessing, itertools, 
+argparse, math, cv2, ipython_bell, shapefile
+            
