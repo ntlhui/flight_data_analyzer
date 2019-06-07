@@ -17,6 +17,10 @@ def lc(path):
 class DJILog(object):
 	"""DJI Log CSV"""
 	def __init__(self, path):
+		'''Creates a new DJI log object from the supplied CSV file
+
+		:param path	Path to CSV file generated from DatCon
+		'''
 		super(DJILog, self).__init__()
 		assert(os.path.isfile(path))
 		assert(os.path.getsize(path) > 0)
@@ -24,7 +28,10 @@ class DJILog(object):
 		self.path = path
 
 	def _not_empty(self, lst):
-		'''Checks that all elements of the list of strings are nonempty'''
+		'''Checks that all elements of the list of strings are nonempty
+
+		:return True/False	True if the none of the elements are empty
+		'''
 		assert(isinstance(lst, list))
 		for element in lst:
 			assert(isinstance(element, str))
@@ -55,7 +62,10 @@ class DJILog(object):
 
 	def extract_6dof(self):
 		'''Extracts the timestamp, latitude, longitude, altitude, roll, pitch, 
-		and yaw from this logfile
+		and yaw from this logfile as an array
+
+		:returns data	Array with columns offsetTime (s), longitude, latitude,
+						relative altitude, roll, pitch, yaw, all in degrees/meters
 		'''
 		fields = ['offsetTime',
 				  'IMU_ATTI(0):Longitude',
@@ -71,7 +81,11 @@ class DJILog(object):
 		return np.array(poses)
 
 	def extract_vel(self):
-		'''Extracts the north, east, and down velocities from this logfile.'''
+		'''Extracts the north, east, and down velocities from this logfile.
+	
+		:returns	data	Array with columns offsetTime (s), velN (m/s), 
+							velE (m/s), velD (m/s)
+		'''
 		fields = ['offsetTime',
 				  'IMU_ATTI(0):velN',
 				  'IMU_ATTI(0):velE',
@@ -82,7 +96,11 @@ class DJILog(object):
 		return np.array(velocities)
 
 	def extract_rc(self):
-		'''Extracts the RC channels from this logfile'''
+		'''Extracts the RC channels from this logfile
+
+		:returns	data	Array with columns offsetTime (s), throttle (0-255),
+							rudder (0-255), elevator (0-255), aileron (0-255)
+		'''
 		fields = ['offsetTime',
 				  'RC:Throttle',
 				  'RC:Rudder',
@@ -100,18 +118,18 @@ class DJILog(object):
 		return np.array(modes)
 
 	def extract_current(self):
-		'''Extracts the battery current from this logfile'''
+		'''Extracts the battery current from this logfile in amps'''
 		fields = ['offsetTime',
 				  'BattInfo:Current']
 		current_str = self.extract_fields(fields)
 		current = [[float(x) for x in i] for i in current_str if self._not_empty(i)]
 		return np.array(current)
 
-	def extract_vel_current(self):
-		'''Extracts the velocities and current for this log
+	def extract_vel_power(self):
+		'''Extracts the velocities and power for this log
 
 		:returns	v	Timestamped velocities for this log in m/s as Vn, Ve, Vd
-					c	Timestamped currents for this log
+					c	Timestamped power for this log
 		'''
 		fields = ['offsetTime', 'IMU_ATTI(0):velN', 'IMU_ATTI(0):velE', 
 					'IMU_ATTI(0):velD', 'BattInfo:Current', 'BattInfo:Pack_ve']
