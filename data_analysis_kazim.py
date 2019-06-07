@@ -6,6 +6,13 @@ import os
 import pickle
 
 def get_files():
+    '''
+    Searches through the Google Drive folder and returns the paths of .BIN files.
+    Args:
+        None
+    Returns:
+        files: (list(string)), List of paths
+    '''
     #files = glob.glob("/root/gdrive" + '/**/*.bin', recursive=True) + glob.glob("/root/gdrive" + '/**/*.BIN', recursive=True)
     files = glob.glob("/home/ntlhui/googledrive" + '/**/*.BIN', recursive=True)
 
@@ -14,6 +21,16 @@ def get_files():
 
 
 def get_altitudes(files):
+    '''
+    Extracts the altitudes from the log files given.
+    Arg:
+        files: (list(string)), List of paths
+    Returns:
+        df_list: (list(pd.Dataframe)), list of pandas dataframes that has 'Time' and 'Altitude' columns for each file in files.
+    '''
+
+    assert isinstance(files,list), "Files must be a 'list' of paths "
+    assert all(isinstance(file,str) for file in files), "File paths should be string type"
 
     field = 'GPS'
     field = 'AHR2'
@@ -44,6 +61,18 @@ def get_altitudes(files):
 
 
 def get_dates(files):
+    '''
+    Extracts takeoff dates, number of fligts, takeoff times and takeoff durations from the log files given.
+    Arg:
+        files: (list(string)), List of paths
+    Returns:
+        df: (pd.Dataframe), Pandas dataframe that has 'Takeoff Date','Number of FLights', 
+             Takeoff Times' and 'Flight Durations' columns for each file in files.
+    '''
+ 
+    assert isinstance(files,list), "Files must be a 'list' of paths "
+    assert all(isinstance(file,str) for file in files), "File paths should be string type"
+    
     i = 1
     df = pd.DataFrame(columns = ['Flight Date','Number of Flights','Takeoff Times','Flight Durations'])
     for file in files:
@@ -63,6 +92,15 @@ def get_dates(files):
     return df
 
 def get_currents(files):
+    '''
+    Extracts current information from the log files given.
+    Arg:
+        files: (list(string)), List of paths
+    Returns:
+        df_list:  (list(pd.Dataframe)), list of pandas dataframes that has 'Time','Current' columns for each file in files.
+    '''
+    assert isinstance(files,list), "Files must be a 'list' of paths "
+    assert all(isinstance(file,str) for file in files), "File paths should be string type"
 
     field = 'CURR'
 
@@ -84,6 +122,18 @@ def get_currents(files):
     return df_list
 
 def altitude_brackets(altitudes,currents):
+    '''
+    Extracts the altitudes and the state of the drone ('ground' or 'mission') from the log files given.
+    Arg:
+        altitudes: (list(pd.Dataframe)), List of dataframes of altitude information
+        currents: (list(pd.Dataframe)), List of dataframes of current information
+    Returns:
+        df_list: (list(pd.Dataframe)), list of pandas dataframes that has 'Time' and 'Altitude', 'Bracket' columns for each file in files.
+    '''
+
+    assert isinstance(altitudes,list), "Altitudes input must be a 'list' of altitude dataframe "
+    assert isinstance(currents,list), "Currents input must be a 'list' of current dataframe "
+
     cond = 'Curr < 500'
     brackets = ['ground','mission']
     df_list = []
@@ -108,6 +158,9 @@ def altitude_brackets(altitudes,currents):
 
 
 if __name__ == '__main__':
+
+    # Main function to extract altitudes, takaoff information, current and altitude brackets.
+ 
     files = get_files()
     df_altitudes = get_altitudes(files)
     with open('./data/altitudes.pkl') as f:
