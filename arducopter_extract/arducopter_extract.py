@@ -203,7 +203,8 @@ class ArduLog(object):
 			if msg.get_type() == 'EKF1':
 				v[int(msg.to_dict()[fields[0]] * scale)] = [msg.to_dict()[x] for x in fields[1:4]]
 			if msg.get_type() == 'CURR':
-				c[int(msg.to_dict()[fields[0]] * scale)] = float(msg.to_dict()[fields[4]]) / 1000 * float(msg.to_dict()[fields[5]]) / 100
+				# c[int(msg.to_dict()[fields[0]] * scale)] = float(msg.to_dict()[fields[4]]) / 100
+				c[int(msg.to_dict()[fields[0]] * scale)] = float(msg.to_dict()[fields[4]]) / 100 * float(msg.to_dict()[fields[5]]) / 100
 		return v, c
 
 
