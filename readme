@@ -1,3 +1,5 @@
+Group22: Flight Data Analyzer by Kazim Ergun, Nathan Hui, Xinyang Zhang
+ 
 The data is included in the data floder, and you should use docker to get access.
 Packages that need to be installed:
   python3, matplotlib, numpy, pandas, folium, calmap, pickle, utm, datetime, hvplot, holoviews, glob, os, seaborn, multiprocessing, 
