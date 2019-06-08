@@ -8,7 +8,11 @@ import matplotlib.pyplot as plt; plt.ion()
 from multiprocessing import Pool
 
 def process(logfile):
-	'''Processes the given logfile for the aircraft type and number of takeoffs'''
+	'''Processes the given logfile for the aircraft type and number of takeoffs
+
+	:returns	acft	Aircraft type as string.  One of SOLO, PX4, S1000, or DJI
+				tofs	Number of takeoffs
+	'''
 	if os.path.getsize(logfile) == 0:
 		return None
 	if os.path.splitext(logfile)[1].lower() == '.bin':
@@ -21,6 +25,11 @@ def process(logfile):
 	return acft, tofs
 
 def extract_takeoffs_apm(logfile):
+	'''Processes the given APM logfile for the aircraft type and number of takeoffs
+
+	:returns	acft	Aircraft type as string.  One of SOLO, PX4, or S1000
+				tofs	Number of takeoffs
+	'''
 	log_struct = arducopter_extract.ArduLog(logfile)
 	acft = log_struct.getType()
 	if acft == arducopter_extract.ACFT.SOLO:
@@ -39,6 +48,11 @@ def extract_takeoffs_apm(logfile):
 	return acft_str, len(takeoff_times)
 
 def extract_takeoffs_dji(logfile):
+	'''Processes the given DJI logfile for the aircraft type and number of takeoffs
+
+	:returns	acft	Aircraft type as string as DJI
+				tofs	Number of takeoffs
+	'''
 	log_struct = dji_extract.DJILog(logfile)
 	acft_str = 'DJI'
 	tofs = log_struct.get_takeoffs()
