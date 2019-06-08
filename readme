@@ -1,11 +1,11 @@
 Group22: Flight Data Analyzer by Kazim Ergun, Nathan Hui, Xinyang Zhang
  
-Use docker folder and the instrcution inside to acess the raw data.
+Use docker folder and the instrcution inside to get acess to the raw data.
 Packages that need to be installed:
-  python3, matplotlib, numpy, pandas, folium, calmap, pickle, utm, datetime, hvplot, holoviews, glob, os, seaborn, multiprocessing, 
+  matplotlib, numpy, pandas, folium, calmap, pickle, utm, datetime, hvplot, holoviews, glob, os, seaborn, multiprocessing, 
   itertools, argparse, math, cv2, ipython_bell, shapefile, and folder dji_extract, arducopter_extract we create must be included.
 File Structure:
-  data_analysis.py extract the data from docker and then the data is stored inside data folder, then the visualization for data
+  data_analysis.py extracts the data from docker and then the data is stored inside data folder, then the visualization for data
   is made by Flight Logs Analyzer Visualization.ipynb, to run this file, please make sure that following files are included:
     data/ranges.npy
     data/distances.npy
