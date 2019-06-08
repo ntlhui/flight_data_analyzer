@@ -8,7 +8,7 @@ import holoviews as hv
 
 
 
-df = pd.read_pickle('dates.pkl')
+df = pd.read_pickle('data/dates.pkl')
 # df = df[['Flight Date','Flight Durations']]
 # df = df[~df['Flight Date'].isnull()]
 # df = df.groupby('Flight Date').agg(sum)

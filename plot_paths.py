@@ -91,7 +91,7 @@ def plot_djipath(log, output_filename, overwrite = False):
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Plots the flight paths of the given flight logs')
-	parser.add_argument('--input_dir', '-i', dest='data_dir', help='Directory containing all flight logs to process', default='/root/googledrive')
+	parser.add_argument('--input_dir', '-i', dest='data_dir', help='Directory containing all flight logs to process', default='/root/gdrive')
 	parser.add_argument('--output_dir', '-o', dest='output_dir', help='Directory to store all shapefiles in', default='./paths')
 	args = parser.parse_args()
 

@@ -110,7 +110,7 @@ def plot_data(output_file):
 if __name__ == '__main__':
 
 	parser = argparse.ArgumentParser(description='Calculates the distribution of distance flown in the specified logs')
-	parser.add_argument('--input_dir', '-i', metavar='input_dir', help='Directory containing logs', default='/home/ntlhui/googledrive')
+	parser.add_argument('--input_dir', '-i', metavar='input_dir', help='Directory containing logs', default='/root/gdrive')
 	parser.add_argument('--output_file', '-o', metavar='output_file', help='Path to histogram filename', default='./distance.png')
 
 	args = parser.parse_args()

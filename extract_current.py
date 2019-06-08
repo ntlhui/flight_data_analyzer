@@ -63,7 +63,7 @@ def extract_vel_current_DJI(logfile):
 	return v, c
 
 if __name__ == '__main__':
-	data_dir = '/home/ntlhui/googledrive'
+	data_dir = '/root/gdrive'
 	arducopterlogs = glob.glob(os.path.join(data_dir, "**", "*.BIN"), recursive=True) + glob.glob(os.path.join(data_dir, "**", "*.bin"), recursive=True)
 	djilogs = glob.glob(os.path.join(data_dir, "**", "*.csv"), recursive=True)
 	# all_logs = djilogs

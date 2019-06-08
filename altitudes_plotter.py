@@ -4,7 +4,7 @@ import calmap
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-df = pd.read_csv('altitudes.csv')
+df = pd.read_csv('data/altitudes.csv')
 
 #df = df['Alt']
 bins = [0,25,50,75,100,150,200,250,300]

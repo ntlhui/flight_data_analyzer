@@ -14,7 +14,7 @@ def get_files():
         files: (list(string)), List of paths
     '''
     #files = glob.glob("/root/gdrive" + '/**/*.bin', recursive=True) + glob.glob("/root/gdrive" + '/**/*.BIN', recursive=True)
-    files = glob.glob("/home/ntlhui/googledrive" + '/**/*.BIN', recursive=True)
+    files = glob.glob("/root/gdrive" + '/**/*.BIN', recursive=True)
 
     return files
 

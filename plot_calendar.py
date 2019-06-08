@@ -3,7 +3,7 @@ import pandas as pd
 import calmap
 import matplotlib.pyplot as plt
 
-df = pd.read_pickle('dates.pkl')
+df = pd.read_pickle('data/dates.pkl')
 df = df[['Flight Date','Number of Flights','Flight Durations']]
 #df = df[['Flight Date','Number of Flights']]
 df = df[~df['Flight Date'].isnull()]

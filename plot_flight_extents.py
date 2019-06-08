@@ -148,7 +148,7 @@ def reorder_extent(rect1):
 if __name__ == '__main__':
 
 	parser = argparse.ArgumentParser(description='Plots the extents of flight areas in the specified logs')
-	parser.add_argument('--input_dir', '-i', metavar='input_dir', help='Directory containing logs', default='/home/ntlhui/googledrive')
+	parser.add_argument('--input_dir', '-i', metavar='input_dir', help='Directory containing logs', default='/root/gdrive')
 	parser.add_argument('--output_file', '-o', metavar='output_file', help='Path to extents filename', default='./flight_areas.shp')
 
 	args = parser.parse_args()
