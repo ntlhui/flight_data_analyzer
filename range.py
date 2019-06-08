@@ -17,6 +17,7 @@ def process_ac(logfile):
 	from home.
 
 	param:	logfile		Path to the ArduCopter binary log file
+	return:	max_rng		Maximum range from start point, or None if bad file
 	'''
 	if os.path.getsize(logfile) == 0:
 		return
@@ -49,6 +50,7 @@ def process_dji(logfile):
 	from home.
 
 	param:	logfile		Path to the DJI csv log file
+	return:	max_rng		Maximum range from start point, or None if bad file
 	'''
 	if os.path.getsize(logfile) == 0:
 		return
