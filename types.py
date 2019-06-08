@@ -20,8 +20,10 @@ def process(logfile):
 		if retval is None:
 			return None
 		acft, tofs = retval
-	if os.path.splitext(logfile)[1].lower() == '.csv':
+	elif os.path.splitext(logfile)[1].lower() == '.csv':
 		acft, tofs = extract_takeoffs_dji(logfile)
+	else:
+		assert(False)
 	return acft, tofs
 
 def extract_takeoffs_apm(logfile):
