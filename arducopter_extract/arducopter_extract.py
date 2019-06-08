@@ -36,6 +36,8 @@ class ArduLog(object):
 		:param date: datetime instance
 		:return: leap seconds for the date (int)
 		"""
+
+		assert isinstance(date,date.datetime), "Date input must be of correct type"
 		if date < datetime.datetime(1981, 6, 30, 23, 59, 59):
 			return 0
 		leap_list = [(1981, 6, 30), (1982, 6, 30), (1983, 6, 30),
@@ -52,6 +54,10 @@ class ArduLog(object):
 		return len(leap_dates)
 
 	def getType(self):
+		"""
+		Extracts the type of aircraft
+		:return: type of the aircraft (ACFT)
+		"""
 		if self.acft == ACFT.UNKNOWN:
 			self.mav_master = mavutil.mavlink_connection(self.path)
 			while True:
@@ -74,6 +80,11 @@ class ArduLog(object):
 
 
 	def extract_6dof1(self):
+		"""
+		Extracts Latitude, longitutde, altitude and time stamps
+		:return: GPS field data (np.array)
+		"""
+
 		self.mav_master = mavutil.mavlink_connection(self.path)
 
 		poses = []
@@ -104,6 +115,11 @@ class ArduLog(object):
 		return np.array(poses)        
 
 	def extract_6dof2(self):
+		"""
+		Extracts Roll, pitch and yaw angles and time stamps
+		:return: ATT field data (np.array)
+		"""
+
 		self.mav_master = mavutil.mavlink_connection(self.path)
 		ATT_fields = ['TimeMS',
 					  'Roll',
@@ -123,6 +139,11 @@ class ArduLog(object):
 	
 
 	def extract_6dof3(self):
+		"""
+		Extracts Roll, pitch and yaw angles, altitude, latitude, longitude and time stamps
+		:return: AHR2 field data (np.array)
+		"""
+
 		self.mav_master = mavutil.mavlink_connection(self.path)
 		AHR2_fields = ['TimeMS',
 					   'Roll',
@@ -144,6 +165,10 @@ class ArduLog(object):
 		return np.array(poses)
 
 	def extract_vel(self):
+		"""
+		Extracts Roll, pitch and yaw angles and time stamps
+		:return: ATT field data (np.array)
+		"""		
 		self.mav_master = mavutil.mavlink_connection(self.path)
 		EKF1_fields = ['TimeMS',
 				  	   'VN',
@@ -177,7 +202,8 @@ class ArduLog(object):
 		return np.array(currents)
 
 	def extract_vel_current(self):
-		'''Returns the velocities and currents from this logfile
+		'''
+		Returns the velocities and currents from this logfile
 
 		:returns	v	Dictionary of timestamped velocities Vn, Ve, Vd
 					c	Dictionary of timestamped current draw
@@ -209,6 +235,10 @@ class ArduLog(object):
 
 
 	def extract_modes(self):
+		"""
+		Extracts flight modes
+		:return: MODE field data (np.array)
+		"""
 		self.mav_master = mavutil.mavlink_connection(self.path)
 		MODE_fields = ['TimeMS',
 					   'Mode']
@@ -224,6 +254,13 @@ class ArduLog(object):
 		return np.array(modes)
 
 	def extract_takeoffs(self):
+		"""
+		Extracts takeoff time stamps
+		:returns	takeoff_date	List of datetime.datetime objects yyyy/mm/dd
+					takeoff_times	List of datetime.datetime objects hh:mm:ss
+					landing_times	List of datetime.datetime objects hh:mm:ss
+
+		"""
 		self.mav_master = mavutil.mavlink_connection(self.path)
 		takeoff_times = []
 		landing_times = []
@@ -323,6 +360,8 @@ class ArduLog(object):
 
 
 if __name__ == '__main__':
+	# Main function to extract data from Arducopter logs.
+	
 	path = '423.BIN'
 	log = ArduLog(path)
 	# poses1 = log.extract_6dof1()
