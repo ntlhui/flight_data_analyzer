@@ -12,10 +12,14 @@ File Structure:
     data/flight_extents.npy
     data/altitudes.pkl
     data/dates.pkl
-    data/dict_extents.npy
     data/dji_vel_cur.pkl
     data/solo_vel_cur.pkl
     data/types.pkl
   
-
-            
+To generate data/ranges.py, run range.py
+To generate data/distances.npy, run distance.py
+To generate data/flight_extents.npy, run plot_flight_extents.py
+To generate data/altitudes.pkl, run data_analysis.py
+To generate data/dates.pkl, run data_analysis.py
+To generate data/dji_vel_cur.pkl or data/solo_vel_cur.pkl, run extract_current.py with the appropriate lines commented
+To generate data/types.pkl, run types.py
