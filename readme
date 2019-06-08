@@ -1,6 +1,6 @@
 Group22: Flight Data Analyzer by Kazim Ergun, Nathan Hui, Xinyang Zhang
  
-Use docker folder and the instrcution inside to acess the raw data.
+Use docker folder and the instrcution inside to get acess to the raw data.
 Packages that need to be installed:
   python3, matplotlib, numpy, pandas, folium, calmap, pickle, utm, datetime, hvplot, holoviews, glob, os, seaborn, multiprocessing, 
   itertools, argparse, math, cv2, ipython_bell, shapefile, and folder dji_extract, arducopter_extract we create must be included.
