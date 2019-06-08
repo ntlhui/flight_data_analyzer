@@ -11,7 +11,6 @@ from itertools import product
 import utm
 import cv2
 import argparse
-import ipython_bell
 import shapefile
 
 def invert_tf(tf):
