@@ -149,7 +149,7 @@ if __name__ == '__main__':
 
 	parser = argparse.ArgumentParser(description='Plots the extents of flight areas in the specified logs')
 	parser.add_argument('--input_dir', '-i', metavar='input_dir', help='Directory containing logs', default='/root/gdrive')
-	parser.add_argument('--output_file', '-o', metavar='output_file', help='Path to extents filename', default='./flight_areas.shp')
+	parser.add_argument('--output_file', '-o', metavar='output_file', help='Path to extents filename', default='./outputs/flight_areas.shp')
 
 	args = parser.parse_args()
 
@@ -185,7 +185,7 @@ if __name__ == '__main__':
 			extents = [(float(coord.split(',')[0]), float(coord.split(',')[1])) for coord in raw_extents]
 			all_extents += [extents]
 
-	np.save('flight_extents.npy', all_extents)
+	np.save('data/flight_extents.npy', all_extents)
 
 	flight_areas = []
 

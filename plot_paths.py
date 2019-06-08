@@ -92,13 +92,15 @@ def plot_djipath(log, output_filename, overwrite = False):
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Plots the flight paths of the given flight logs')
 	parser.add_argument('--input_dir', '-i', dest='data_dir', help='Directory containing all flight logs to process', default='/root/gdrive')
-	parser.add_argument('--output_dir', '-o', dest='output_dir', help='Directory to store all shapefiles in', default='./paths')
+	parser.add_argument('--output_dir', '-o', dest='output_dir', help='Directory to store all shapefiles in', default='./outputs')
 	args = parser.parse_args()
 
 	data_dir = args.data_dir
 	arducopterlogs = glob.glob(os.path.join(data_dir, "**", "*.BIN"), recursive=True) + glob.glob(os.path.join(data_dir, "**", "*.bin"), recursive=True)
 	djilogs = glob.glob(os.path.join(data_dir, "**", "*.csv"), recursive=True)
 	output_dir = args.output_dir
+
+	assert os.path.isdir(output_dir), "Output directory is not a directory!"
 
 	overwrite = True
 

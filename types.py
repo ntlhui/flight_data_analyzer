@@ -61,7 +61,7 @@ def extract_takeoffs_dji(logfile):
 	return acft_str, tofs
 
 if __name__ == '__main__':
-	data_dir = '/home/ntlhui/googledrive'
+	data_dir = '/root/gdrive'
 	all_logs = glob.glob(os.path.join(data_dir, '**', '*.BIN'), recursive=True) + \
 			   glob.glob(os.path.join(data_dir, '**', '*.bin'), recursive=True) + \
 			   glob.glob(os.path.join(data_dir, '**', '*.csv'), recursive=True)
